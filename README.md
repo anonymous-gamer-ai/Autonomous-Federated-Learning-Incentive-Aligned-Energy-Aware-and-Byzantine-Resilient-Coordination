@@ -1,5 +1,5 @@
 <p align="center">
-  <h1 align="center">🛡️ Autonomous Federated Learning (AFL)</h1>
+  <h1 align="center"> Autonomous Federated Learning (AFL)</h1>
   <p align="center">
     <strong>Incentive-Aligned · Energy-Aware · Byzantine-Resilient</strong>
   </p>

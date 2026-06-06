@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: client-service
+  namespace: fl-sim
+spec:
+  clusterIP: None # Headless service for Prometheus discovery
+  selector:
+    app: fl-client
+  ports:
+    - port: 8003
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fl-clients
+  namespace: fl-sim
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fl-client
+  template:
+    metadata:
+      labels:
+        app: fl-client
+    spec:
+      containers:
+        - name: client
+          image: fl-client:v1
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: BROKER_URL
+              value: "kafka:9092"
+            - name: NODE_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name # Unique name per pod (e.g. fl-clients-xyz)
+            - name: PROM_PORT
+              value: "8003"
+          ports:
+            - containerPort: 8003

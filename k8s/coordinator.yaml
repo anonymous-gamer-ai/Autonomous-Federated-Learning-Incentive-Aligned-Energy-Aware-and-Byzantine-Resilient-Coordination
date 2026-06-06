@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: coordinator
+  namespace: fl-sim
+spec:
+  ports:
+    - port: 8000
+      name: metrics
+  selector:
+    app: coordinator
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coordinator
+  namespace: fl-sim
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: coordinator
+  template:
+    metadata:
+      labels:
+        app: coordinator
+    spec:
+      containers:
+        - name: coordinator
+          image: fl-coordinator:v1 # Ensure this image is built/available
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: BROKER_URL
+              value: "kafka:9092"
+            - name: DB_HOST
+              value: "postgres"
+            - name: PROM_PORT
+              value: "8000"
+          ports:
+            - containerPort: 8000

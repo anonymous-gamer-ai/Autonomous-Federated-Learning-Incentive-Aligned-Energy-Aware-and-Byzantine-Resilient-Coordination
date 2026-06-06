@@ -1,0 +1,6 @@
+torch
+torchvision
+numpy
+kafka-python
+psycopg2-binary
+prometheus-client

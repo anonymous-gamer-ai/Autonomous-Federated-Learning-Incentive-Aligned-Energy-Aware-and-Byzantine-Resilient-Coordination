@@ -126,7 +126,6 @@ Methods such as CClip, MCA, and Geometric Median collapse to near-chance accurac
 - Apache Kafka (or use the K8s manifest)
 - PostgreSQL (or use the K8s manifest)
 - *(Optional)* LibreHardwareMonitor for real energy telemetry
-- *(Optional)* OpenAI API key for GPT-4 client selection
 
 ### Local Simulation (No Infrastructure)
 
